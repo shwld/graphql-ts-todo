@@ -13,6 +13,7 @@ datasource db {
 model Task {
   id          String   @id @default(uuid())
   createdAt   DateTime @default(now())
-  name        String
+  updatedAt   DateTime @updatedAt
+  title       String   @db.VarChar(255)
   description String?
 }
