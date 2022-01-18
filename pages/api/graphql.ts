@@ -13,7 +13,7 @@ async function getApolloServerHandler(): Promise<RequestHandler> {
     await apolloServer.start();
 
     apolloServerHandler = apolloServer.createHandler({
-      path: '/api',
+      path: '/api/graphql',
     });
   }
 
