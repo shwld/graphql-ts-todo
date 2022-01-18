@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { ApolloServer } from 'apollo-server-micro';
 import Cors from 'micro-cors';
 import { schema } from '../../graphql/schema';
@@ -11,7 +10,7 @@ let apolloServerHandler: RequestHandler;
 const cors = Cors();
 
 async function getApolloServerHandler(): Promise<RequestHandler> {
-  if (!apolloServerHandler) {
+  if (apolloServerHandler == null) {
     await apolloServer.start();
 
     apolloServerHandler = apolloServer.createHandler({
@@ -21,10 +20,6 @@ async function getApolloServerHandler(): Promise<RequestHandler> {
 
   return apolloServerHandler;
 }
-
-type Data = {
-  name: string;
-};
 
 const handler: RequestHandler = async (req, res) => {
   const apolloServerHandler = await getApolloServerHandler();
