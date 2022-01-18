@@ -1319,6 +1319,17 @@
     auto-bind "~4.0.0"
     tslib "~2.3.0"
 
+"@graphql-codegen/typescript-urql@^3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-urql/-/typescript-urql-3.4.2.tgz#8f697ca86c8f12f4938e7c458af8935c350e6e20"
+  integrity sha512-MYpxOs7S/AMTMBATSqKGuijB5MK7hTNXJGyd8uXhjlJvYG1lgi+M1fWJuTOzsijn56uISh0OUgrZJcv7rVkT6w==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.3.2"
+    "@graphql-codegen/visitor-plugin-common" "2.5.2"
+    auto-bind "~4.0.0"
+    change-case-all "1.0.14"
+    tslib "~2.3.0"
+
 "@graphql-codegen/typescript@2.4.2", "@graphql-codegen/typescript@^2.4.2":
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.4.2.tgz#a239d5fd8f11140d5d4c81cfae7ff02054b724dc"
@@ -1328,15 +1339,6 @@
     "@graphql-codegen/schema-ast" "^2.4.1"
     "@graphql-codegen/visitor-plugin-common" "2.5.2"
     auto-bind "~4.0.0"
-    tslib "~2.3.0"
-
-"@graphql-codegen/urql-introspection@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/urql-introspection/-/urql-introspection-2.1.1.tgz#c9e682436235f5b32aeb7990f40e63d21d632982"
-  integrity sha512-XLDLxyK8N3x3fvbkMoDb6lYPX2/rx3LiYT8dBeZYrBH1i9Tu0kfcEg0GeqNeLxiwnch9PZIC3O+gzROqP+rveA==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.3.2"
-    "@urql/introspection" "0.3.1"
     tslib "~2.3.0"
 
 "@graphql-codegen/visitor-plugin-common@2.5.2":
@@ -2081,11 +2083,6 @@
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.0"
     wonka "^4.0.14"
-
-"@urql/introspection@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@urql/introspection/-/introspection-0.3.1.tgz#7a0d71a839bd807db57cb067a6c469fe74fb87cb"
-  integrity sha512-4Srr45lA00cVlfRGtGJqYlc2vcPN6BZwFW9EVY20yROaoADCGNxm6xmScZhxuCRQPhOB9DXtuYs2KNrOo84ZeA==
 
 abort-controller@^3.0.0:
   version "3.0.0"

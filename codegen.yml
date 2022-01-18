@@ -7,7 +7,6 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-document-nodes"
-      - "urql-introspection"
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
+      - "typescript-urql"
+    config:
+      withHooks: true

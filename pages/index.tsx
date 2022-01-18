@@ -2,19 +2,11 @@ import type { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import Head from 'next/head';
 import Image from 'next/image';
-import { gql, useQuery } from 'urql';
+import { useIndexPageQuery } from '../generated/graphql';
 import styles from '../styles/Home.module.css';
 
 const Index: NextPage = () => {
-  const [res] = useQuery({
-    query: gql`
-      query {
-        tasks {
-          id
-        }
-      }
-    `,
-  });
+  const [res] = useIndexPageQuery();
   console.log(res);
   return (
     <div className={styles.container}>
@@ -25,8 +17,8 @@ const Index: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {res.data.tasks.map((task) => (
-          <div key={task.id}>{task.id}</div>
+        {res.data?.tasks.map((task) => (
+          <div key={task?.id}>{task?.id}</div>
         ))}
       </main>
 
