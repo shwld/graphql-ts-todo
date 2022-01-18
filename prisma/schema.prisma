@@ -11,6 +11,7 @@ datasource db {
 }
 
 model Task {
+  @@map("tasks")
   id          String   @id @default(uuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -22,6 +23,7 @@ model Task {
 }
 
 model Label {
+  @@map("labels")
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -32,6 +34,7 @@ model Label {
 }
 
 model User {
+  @@map("users")
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
