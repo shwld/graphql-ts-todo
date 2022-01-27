@@ -9,7 +9,7 @@
     "generate": "yarn generate:prisma && yarn generate:nexus && yarn generate:codegen",
     "generate:codegen": "graphql-codegen --config codegen.yml",
     "generate:prisma": "prisma generate",
-    "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json pages/api",
+    "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json pages/api/graphql",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "studio": "yarn prisma studio"
   },
@@ -49,5 +49,8 @@
     "prisma": "^3.8.1",
     "ts-node": "^10.4.0",
     "typescript": "4.5.4"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
