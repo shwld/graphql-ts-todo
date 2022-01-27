@@ -4,7 +4,7 @@
  */
 
 
-
+import type { Context } from "./graphql/context"
 
 
 
@@ -28,6 +28,7 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
   Query: {};
   Task: { // root type
     description?: string | null; // String
@@ -47,6 +48,9 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createTask: NexusGenRootTypes['Task']; // Task!
+  }
   Query: { // field return type
     tasks: Array<NexusGenRootTypes['Task'] | null>; // [Task]!
   }
@@ -58,6 +62,9 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    createTask: 'Task'
+  }
   Query: { // field return type name
     tasks: 'Task'
   }
@@ -69,6 +76,12 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createTask: { // args
+      description: string; // String!
+      title: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -102,7 +115,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

@@ -1,6 +1,5 @@
 query indexPage {
   tasks {
-    id
-    title
+    ...TaskSummary
   }
 }
