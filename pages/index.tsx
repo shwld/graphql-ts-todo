@@ -10,7 +10,6 @@ import styles from '../styles/Home.module.css';
 
 const Index: NextPage = () => {
   const [res] = useIndexPageQuery();
-  console.log(res);
   return (
     <>
       <Head>

@@ -14,14 +14,8 @@ export const TaskQuery = extendType({
   definition(t) {
     t.nonNull.list.field('tasks', {
       type: 'Task',
-      resolve() {
-        return [
-          {
-            id: 'f28304dc-ea55-5dd3-83b7-7ed728815c6d',
-            title: 'Nexus',
-            description: '...',
-          },
-        ];
+      resolve(_root, args, ctx) {
+        return ctx.db.task.findMany();
       },
     });
   },
