@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
-import { withUrqlClient } from 'next-urql';
+import { withClient } from '../graphql/urql';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,9 +11,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default withUrqlClient(
-  () => ({
-    url: 'http://localhost:3000/api/graphql',
-  }),
-  { ssr: false }
-)(MyApp);
+export default withClient({ ssr: false })(MyApp);

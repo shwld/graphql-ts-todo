@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { withUrqlClient } from 'next-urql';
 import Head from 'next/head';
 import { AddTaskButton } from '../compoments/AddTaskButton';
 import Card from '../compoments/Card';
@@ -8,6 +7,7 @@ import SidebarWithHeader from '../compoments/SideBar';
 import { TaskSummaryCard } from '../compoments/Task';
 import { filterOfPresentation } from '../functions/filterOfPresentation';
 import { useIndexPageQuery } from '../generated/graphql';
+import { withClient } from '../graphql/urql';
 
 const Index: NextPage = () => {
   const [res] = useIndexPageQuery();
@@ -34,9 +34,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default withUrqlClient(
-  () => ({
-    url: 'http://localhost:3000/api/graphql',
-  }),
-  { ssr: true }
-)(Index);
+export default withClient()(Index);
