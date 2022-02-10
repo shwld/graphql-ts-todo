@@ -3,7 +3,7 @@ import { extendType, objectType } from 'nexus';
 export const Task = objectType({
   name: 'Task',
   definition(t) {
-    t.string('id');
+    t.nonNull.string('id');
     t.string('title');
     t.string('description');
   },

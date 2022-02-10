@@ -32,7 +32,7 @@ export interface NexusGenObjects {
   Query: {};
   Task: { // root type
     description?: string | null; // String
-    id?: string | null; // String
+    id: string; // String!
     title?: string | null; // String
   }
 }
@@ -50,13 +50,14 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createTask: NexusGenRootTypes['Task']; // Task!
+    deleteTask: NexusGenRootTypes['Task']; // Task!
   }
   Query: { // field return type
     tasks: Array<NexusGenRootTypes['Task'] | null>; // [Task]!
   }
   Task: { // field return type
     description: string | null; // String
-    id: string | null; // String
+    id: string; // String!
     title: string | null; // String
   }
 }
@@ -64,6 +65,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createTask: 'Task'
+    deleteTask: 'Task'
   }
   Query: { // field return type name
     tasks: 'Task'
@@ -80,6 +82,9 @@ export interface NexusGenArgTypes {
     createTask: { // args
       description: string; // String!
       title: string; // String!
+    }
+    deleteTask: { // args
+      id: string; // ID!
     }
   }
 }

@@ -1,15 +1,13 @@
-import { Stack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import Head from 'next/head';
-import Image from 'next/image';
 import { AddTaskButton } from '../compoments/AddTaskButton';
 import Card from '../compoments/Card';
-import Navigation from '../compoments/Header';
+import { DeleteTaskButton } from '../compoments/DeleteTaskButton';
 import SidebarWithHeader from '../compoments/SideBar';
 import { TaskSummaryCard } from '../compoments/Task';
+import { filterOfPresentation } from '../functions/filterOfPresentation';
 import { useIndexPageQuery } from '../generated/graphql';
-import styles from '../styles/Home.module.css';
 
 const Index: NextPage = () => {
   const [res] = useIndexPageQuery();
@@ -24,8 +22,10 @@ const Index: NextPage = () => {
       <SidebarWithHeader>
         <Card>
           <AddTaskButton />
-          {res.data?.tasks.map((task) => (
-            <TaskSummaryCard key={task?.id} task={task!} />
+          {filterOfPresentation(res.data?.tasks ?? []).map((task) => (
+            <TaskSummaryCard key={task.id} task={task!}>
+              <DeleteTaskButton id={task.id} />
+            </TaskSummaryCard>
           ))}
         </Card>
       </SidebarWithHeader>

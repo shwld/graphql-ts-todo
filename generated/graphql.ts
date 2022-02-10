@@ -18,12 +18,18 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   createTask: Task;
+  deleteTask: Task;
 };
 
 
 export type MutationCreateTaskArgs = {
   description: Scalars['String'];
   title: Scalars['String'];
+};
+
+
+export type MutationDeleteTaskArgs = {
+  id: Scalars['ID'];
 };
 
 export type Query = {
@@ -34,7 +40,7 @@ export type Query = {
 export type Task = {
   __typename?: 'Task';
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   title?: Maybe<Scalars['String']>;
 };
 
@@ -44,14 +50,21 @@ export type CreateTaskMutationVariables = Exact<{
 }>;
 
 
-export type CreateTaskMutation = { __typename?: 'Mutation', createTask: { __typename?: 'Task', id?: string | null | undefined, title?: string | null | undefined, description?: string | null | undefined } };
+export type CreateTaskMutation = { __typename?: 'Mutation', createTask: { __typename?: 'Task', id: string, title?: string | null | undefined, description?: string | null | undefined } };
 
-export type TaskSummaryFragment = { __typename?: 'Task', id?: string | null | undefined, title?: string | null | undefined };
+export type DeleteTaskMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteTaskMutation = { __typename?: 'Mutation', deleteTask: { __typename?: 'Task', id: string, title?: string | null | undefined, description?: string | null | undefined } };
+
+export type TaskSummaryFragment = { __typename?: 'Task', id: string, title?: string | null | undefined };
 
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id?: string | null | undefined, title?: string | null | undefined } | null | undefined> };
+export type IndexPageQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title?: string | null | undefined } | null | undefined> };
 
 export const TaskSummary = gql`
     fragment TaskSummary on Task {
@@ -62,6 +75,15 @@ export const TaskSummary = gql`
 export const CreateTask = gql`
     mutation createTask($title: String!, $description: String!) {
   createTask(title: $title, description: $description) {
+    id
+    title
+    description
+  }
+}
+    `;
+export const DeleteTask = gql`
+    mutation deleteTask($id: ID!) {
+  deleteTask(id: $id) {
     id
     title
     description
@@ -93,6 +115,19 @@ export const CreateTaskDocument = gql`
 
 export function useCreateTaskMutation() {
   return Urql.useMutation<CreateTaskMutation, CreateTaskMutationVariables>(CreateTaskDocument);
+};
+export const DeleteTaskDocument = gql`
+    mutation deleteTask($id: ID!) {
+  deleteTask(id: $id) {
+    id
+    title
+    description
+  }
+}
+    `;
+
+export function useDeleteTaskMutation() {
+  return Urql.useMutation<DeleteTaskMutation, DeleteTaskMutationVariables>(DeleteTaskDocument);
 };
 export const IndexPageDocument = gql`
     query indexPage {

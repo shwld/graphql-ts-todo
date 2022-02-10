@@ -2,19 +2,19 @@ import {
   Heading,
   Avatar,
   Box,
-  Center,
   Flex,
   Text,
   Stack,
   Button,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { VFC } from 'react';
+import { ReactNode, VFC } from 'react';
 import { TaskSummaryFragment } from '../../generated/graphql';
 
-export const TaskSummaryCard: VFC<{ task: TaskSummaryFragment }> = ({
-  task,
-}) => {
+export const TaskSummaryCard: VFC<{
+  task: TaskSummaryFragment;
+  children?: ReactNode;
+}> = ({ task, children }) => {
   return (
     <Box
       w={'full'}
@@ -56,6 +56,7 @@ export const TaskSummaryCard: VFC<{ task: TaskSummaryFragment }> = ({
         >
           Done
         </Button>
+        {children}
       </Flex>
     </Box>
   );
