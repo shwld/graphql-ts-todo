@@ -1,16 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { AddTaskButton } from '../compoments/AddTaskButton';
-import Card from '../compoments/Card';
-import { DeleteTaskButton } from '../compoments/DeleteTaskButton';
 import SidebarWithHeader from '../compoments/SideBar';
-import { TaskSummaryCard } from '../compoments/Task';
-import { filterOfPresentation } from '../functions/filterOfPresentation';
-import { useIndexPageQuery } from '../generated/graphql';
+import { TaskList } from '../compoments/TaskList';
 import { withClient } from '../graphql/urql';
 
 const Index: NextPage = () => {
-  const [res] = useIndexPageQuery();
   return (
     <>
       <Head>
@@ -20,14 +14,7 @@ const Index: NextPage = () => {
       </Head>
       {/* <Stack align="center"> */}
       <SidebarWithHeader>
-        <Card>
-          <AddTaskButton />
-          {filterOfPresentation(res.data?.tasks ?? []).map((task) => (
-            <TaskSummaryCard key={task.id} task={task!}>
-              <DeleteTaskButton id={task.id} />
-            </TaskSummaryCard>
-          ))}
-        </Card>
+        <TaskList />
       </SidebarWithHeader>
       {/* </Stack> */}
     </>

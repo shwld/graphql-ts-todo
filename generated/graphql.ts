@@ -67,15 +67,15 @@ export type DeleteTaskMutationVariables = Exact<{
 
 export type DeleteTaskMutation = { __typename?: 'Mutation', deleteTask: { __typename?: 'Task', id: string, title?: string | null | undefined, description?: string | null | undefined } };
 
-export type TaskSummaryFragment = { __typename?: 'Task', id: string, title?: string | null | undefined };
+export type TaskCardFragment = { __typename?: 'Task', id: string, title?: string | null | undefined };
 
-export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
+export type TaskListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title?: string | null | undefined } | null | undefined> };
+export type TaskListQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title?: string | null | undefined } | null | undefined> };
 
-export const TaskSummary = gql`
-    fragment TaskSummary on Task {
+export const TaskCard = gql`
+    fragment TaskCard on Task {
   id
   title
 }
@@ -98,15 +98,15 @@ export const DeleteTask = gql`
   }
 }
     `;
-export const IndexPage = gql`
-    query indexPage {
+export const TaskList = gql`
+    query taskList {
   tasks {
-    ...TaskSummary
+    ...TaskCard
   }
 }
-    ${TaskSummary}`;
-export const TaskSummaryFragmentDoc = gql`
-    fragment TaskSummary on Task {
+    ${TaskCard}`;
+export const TaskCardFragmentDoc = gql`
+    fragment TaskCard on Task {
   id
   title
 }
@@ -137,14 +137,14 @@ export const DeleteTaskDocument = gql`
 export function useDeleteTaskMutation() {
   return Urql.useMutation<DeleteTaskMutation, DeleteTaskMutationVariables>(DeleteTaskDocument);
 };
-export const IndexPageDocument = gql`
-    query indexPage {
+export const TaskListDocument = gql`
+    query taskList {
   tasks {
-    ...TaskSummary
+    ...TaskCard
   }
 }
-    ${TaskSummaryFragmentDoc}`;
+    ${TaskCardFragmentDoc}`;
 
-export function useIndexPageQuery(options: Omit<Urql.UseQueryArgs<IndexPageQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<IndexPageQuery>({ query: IndexPageDocument, ...options });
+export function useTaskListQuery(options: Omit<Urql.UseQueryArgs<TaskListQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TaskListQuery>({ query: TaskListDocument, ...options });
 };

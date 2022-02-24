@@ -10,15 +10,12 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { ReactNode, useState, VFC } from 'react';
-import {
-  TaskSummaryFragment,
-  useIndexPageQuery,
-} from '../../generated/graphql';
+import { TaskCardFragment } from './taskCard.generated';
 
-export const TaskSummaryPlainCard: VFC<{
-  task: TaskSummaryFragment;
+export const TaskCard: VFC<{
+  task: TaskCardFragment;
   children?: ReactNode;
-  onUpdate(task: TaskSummaryFragment): void;
+  onUpdate?(task: TaskCardFragment): void;
 }> = ({ task, children, onUpdate }) => {
   return (
     <Box
@@ -35,10 +32,12 @@ export const TaskSummaryPlainCard: VFC<{
               value={task.title ?? ''}
               onChange={(e) => {
                 const newTitle = e.target.value;
-                onUpdate({
-                  ...task,
-                  title: newTitle,
-                });
+                if (onUpdate) {
+                  onUpdate({
+                    ...task,
+                    title: newTitle,
+                  });
+                }
               }}
             />
           </Heading>
@@ -73,20 +72,5 @@ export const TaskSummaryPlainCard: VFC<{
         {children}
       </Flex>
     </Box>
-  );
-};
-
-export const TaskSummaryCard: VFC<{
-  task: TaskSummaryFragment;
-  children?: ReactNode;
-}> = ({ task, children }) => {
-  const [result] = useIndexPageQuery();
-
-  return (
-    <>
-      {result.data?.tasks.map((task, i) => (
-        <TaskSummaryPlainCard key={i} task={task} />
-      ))}
-    </>
   );
 };

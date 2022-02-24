@@ -1,0 +1,4 @@
+fragment TaskCard on Task {
+  id
+  title
+}

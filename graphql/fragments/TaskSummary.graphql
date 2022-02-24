@@ -1,4 +1,0 @@
-fragment TaskSummary on Task {
-  id
-  title
-}
