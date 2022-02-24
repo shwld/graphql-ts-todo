@@ -7,14 +7,19 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Input,
 } from '@chakra-ui/react';
-import { ReactNode, VFC } from 'react';
-import { TaskSummaryFragment } from '../../generated/graphql';
+import { ReactNode, useState, VFC } from 'react';
+import {
+  TaskSummaryFragment,
+  useIndexPageQuery,
+} from '../../generated/graphql';
 
-export const TaskSummaryCard: VFC<{
+export const TaskSummaryPlainCard: VFC<{
   task: TaskSummaryFragment;
   children?: ReactNode;
-}> = ({ task, children }) => {
+  onUpdate(task: TaskSummaryFragment): void;
+}> = ({ task, children, onUpdate }) => {
   return (
     <Box
       w={'full'}
@@ -26,7 +31,16 @@ export const TaskSummaryCard: VFC<{
       <Flex p={6} justify="space-between">
         <Stack>
           <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-            {task.title}aaaaaaaaaaaaa
+            <Input
+              value={task.title ?? ''}
+              onChange={(e) => {
+                const newTitle = e.target.value;
+                onUpdate({
+                  ...task,
+                  title: newTitle,
+                });
+              }}
+            />
           </Heading>
           <Flex justify={'start'}>
             <Text color={'gray.500'}>2022/01/19</Text>
@@ -59,5 +73,20 @@ export const TaskSummaryCard: VFC<{
         {children}
       </Flex>
     </Box>
+  );
+};
+
+export const TaskSummaryCard: VFC<{
+  task: TaskSummaryFragment;
+  children?: ReactNode;
+}> = ({ task, children }) => {
+  const [result] = useIndexPageQuery();
+
+  return (
+    <>
+      {result.data?.tasks.map((task, i) => (
+        <TaskSummaryPlainCard key={i} task={task} />
+      ))}
+    </>
   );
 };

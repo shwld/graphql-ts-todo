@@ -1,0 +1,5 @@
+type Task {
+  description: String
+  id: String!
+  title: String
+}

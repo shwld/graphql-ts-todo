@@ -1,12 +1,28 @@
 overwrite: true
-schema: "./schema.graphql"
-documents: "**/*.graphql"
+schema: 'graphql/types/**/*.graphql'
+documents: '**/*.graphql'
 generates:
   generated/graphql.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-document-nodes"
-      - "typescript-urql"
+      - typescript
+      - typescript-operations
+      - typescript-document-nodes
+      - typescript-urql
     config:
       withHooks: true
+  generated/resolvers-types.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      useIndexSignature: true
+      contextType: ../graphql/context#Context
+  generated/schema.json:
+    plugins:
+      - introspection
+  generated/schema.graphql:
+    plugins:
+      - schema-ast
+  generated/typeDefs.ts:
+    plugins:
+      - codegen/plugins/typescript-typedefs.js

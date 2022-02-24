@@ -19,6 +19,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createTask: Task;
   deleteTask: Task;
+  updateTask: Task;
 };
 
 
@@ -30,6 +31,13 @@ export type MutationCreateTaskArgs = {
 
 export type MutationDeleteTaskArgs = {
   id: Scalars['ID'];
+};
+
+
+export type MutationUpdateTaskArgs = {
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  title: Scalars['String'];
 };
 
 export type Query = {
