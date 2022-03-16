@@ -1,9 +1,9 @@
 import { Button, useColorModeValue } from '@chakra-ui/react';
 import { VFC } from 'react';
-import { useDeleteTaskMutation } from '../../generated/graphql';
+import { useCreateTaskMutation } from '../../../../generated/graphql';
 
-export const DeleteTaskButton: VFC<{ id: string }> = ({ id }) => {
-  const [result, deleteTask] = useDeleteTaskMutation();
+export const AddTaskButton: VFC = () => {
+  const [result, createTask] = useCreateTaskMutation();
   return (
     <Button
       disabled={result.fetching}
@@ -16,12 +16,13 @@ export const DeleteTaskButton: VFC<{ id: string }> = ({ id }) => {
         boxShadow: 'lg',
       }}
       onClick={() => {
-        deleteTask({
-          id,
+        createTask({
+          title: '',
+          description: '',
         });
       }}
     >
-      + Delete Task
+      + Add Task
     </Button>
   );
 };

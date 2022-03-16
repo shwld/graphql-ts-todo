@@ -1,0 +1,9 @@
+fragment TaskListCard on Task {
+  id
+  title
+}
+query taskList {
+  tasks {
+    ...TaskListCard
+  }
+}

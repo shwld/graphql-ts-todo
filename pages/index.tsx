@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import SidebarWithHeader from '../compoments/SideBar';
-import { TaskList } from '../compoments/TaskList';
+import SidebarWithHeader from '../compoments/layouts/SideBar';
+import { TaskList } from '../compoments/features/Task/TaskList';
 import { withClient } from '../graphql/urql';
 
 const Index: NextPage = () => {

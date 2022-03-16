@@ -1,3 +1,8 @@
+import { AddTaskButton } from '../CreateTaskButton';
+import Card from '../../../shared/Card';
+import { DeleteTaskButton } from '../DeleteTaskButton';
+import { filterOfPresentation } from '../../../../functions/filterOfPresentation';
+import { useTaskListQuery, TaskListCardFragment } from './taskList.generated';
 import {
   Heading,
   Avatar,
@@ -9,13 +14,12 @@ import {
   useColorModeValue,
   Input,
 } from '@chakra-ui/react';
-import { ReactNode, useState, VFC } from 'react';
-import { TaskCardFragment } from './taskCard.generated';
+import { ReactNode, VFC } from 'react';
 
-export const TaskCard: VFC<{
-  task: TaskCardFragment;
+const TaskCard: VFC<{
+  task: TaskListCardFragment;
   children?: ReactNode;
-  onUpdate?(task: TaskCardFragment): void;
+  onUpdate?(task: TaskListCardFragment): void;
 }> = ({ task, children, onUpdate }) => {
   return (
     <Box
@@ -57,20 +61,32 @@ export const TaskCard: VFC<{
           </Flex>
         </Stack>
 
-        <Button
-          w={100}
-          bg={useColorModeValue('#151f21', 'gray.900')}
-          color={'white'}
-          rounded={'md'}
-          _hover={{
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          }}
-        >
-          Done
-        </Button>
         {children}
       </Flex>
     </Box>
+  );
+};
+
+export const TaskList: VFC<{ children?: ReactNode }> = ({ children }) => {
+  const [res] = useTaskListQuery();
+  return (
+    <>
+      {filterOfPresentation(res.data?.tasks ?? []).map((task) => (
+        <TaskCard key={task.id} task={task!}>
+          <Button
+            w={100}
+            bg={useColorModeValue('#151f21', 'gray.900')}
+            color={'white'}
+            rounded={'md'}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
+            }}
+          >
+            Done
+          </Button>
+        </TaskCard>
+      ))}
+    </>
   );
 };

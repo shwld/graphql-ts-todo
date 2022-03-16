@@ -67,15 +67,15 @@ export type DeleteTaskMutationVariables = Exact<{
 
 export type DeleteTaskMutation = { __typename?: 'Mutation', deleteTask: { __typename?: 'Task', id: string, title?: string | null | undefined, description?: string | null | undefined } };
 
-export type TaskCardFragment = { __typename?: 'Task', id: string, title?: string | null | undefined };
+export type TaskListCardFragment = { __typename?: 'Task', id: string, title?: string | null | undefined };
 
 export type TaskListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TaskListQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title?: string | null | undefined } | null | undefined> };
 
-export const TaskCard = gql`
-    fragment TaskCard on Task {
+export const TaskListCard = gql`
+    fragment TaskListCard on Task {
   id
   title
 }
@@ -101,12 +101,12 @@ export const DeleteTask = gql`
 export const TaskList = gql`
     query taskList {
   tasks {
-    ...TaskCard
+    ...TaskListCard
   }
 }
-    ${TaskCard}`;
-export const TaskCardFragmentDoc = gql`
-    fragment TaskCard on Task {
+    ${TaskListCard}`;
+export const TaskListCardFragmentDoc = gql`
+    fragment TaskListCard on Task {
   id
   title
 }
@@ -140,10 +140,10 @@ export function useDeleteTaskMutation() {
 export const TaskListDocument = gql`
     query taskList {
   tasks {
-    ...TaskCard
+    ...TaskListCard
   }
 }
-    ${TaskCardFragmentDoc}`;
+    ${TaskListCardFragmentDoc}`;
 
 export function useTaskListQuery(options: Omit<Urql.UseQueryArgs<TaskListQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<TaskListQuery>({ query: TaskListDocument, ...options });
