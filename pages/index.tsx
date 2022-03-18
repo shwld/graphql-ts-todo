@@ -1,8 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import SidebarWithHeader from '../compoments/layouts/SideBar';
-import { TaskList } from '../compoments/features/Task/TaskList';
+import SidebarWithHeader from '../layouts/SideBar';
+import { TaskList } from '../features/Task/TaskList';
 import { withClient } from '../graphql/urql';
+import { Flex } from '@chakra-ui/react';
 
 const Index: NextPage = () => {
   return (
@@ -14,7 +15,9 @@ const Index: NextPage = () => {
       </Head>
       {/* <Stack align="center"> */}
       <SidebarWithHeader>
-        <TaskList />
+        <Flex>
+          <TaskList />
+        </Flex>
       </SidebarWithHeader>
       {/* </Stack> */}
     </>

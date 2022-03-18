@@ -1,12 +1,12 @@
 import { Button, useColorModeValue } from '@chakra-ui/react';
-import { VFC } from 'react';
+import { ComponentProps, VFC } from 'react';
 import { useDeleteTaskMutation } from '../../../../generated/graphql';
 
-export const DeleteTaskButton: VFC<{ id: string }> = ({ id }) => {
-  const [result, deleteTask] = useDeleteTaskMutation();
+const PresentationalDeleteTaskButton: VFC<ComponentProps<typeof Button>> = (
+  props
+) => {
   return (
     <Button
-      disabled={result.fetching}
       w={100}
       bg={useColorModeValue('#151f21', 'gray.900')}
       color={'white'}
@@ -15,13 +15,23 @@ export const DeleteTaskButton: VFC<{ id: string }> = ({ id }) => {
         transform: 'translateY(-2px)',
         boxShadow: 'lg',
       }}
+      {...props}
+    >
+      Delete Task
+    </Button>
+  );
+};
+
+export const DeleteTaskButton: VFC<{ id: string }> = ({ id }) => {
+  const [result, deleteTask] = useDeleteTaskMutation();
+  return (
+    <PresentationalDeleteTaskButton
+      disabled={result.fetching}
       onClick={() => {
         deleteTask({
           id,
         });
       }}
-    >
-      + Delete Task
-    </Button>
+    />
   );
 };
